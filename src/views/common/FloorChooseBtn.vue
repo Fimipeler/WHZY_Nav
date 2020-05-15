@@ -1,42 +1,42 @@
 <template>
   <div class="FloorChooseBtn">
     <div class="noChoose" @click="clickUnChoose">
-      {{floorNum + 'F'}}
+      {{ floorNum + "F" }}
     </div>
     <div class="choose" @click="clickHasChoose">
       <div class="left-arrow">
-        <img :src="leftarrow">
+        <img :src="leftarrow" />
       </div>
       <div class="chooseFont">
-        {{floorNum + 'F'}}
+        {{ floorNum + "F" }}
       </div>
-      <img class="rotateImg" :src="chooseBtnRotate" >
+      <img class="rotateImg" :src="chooseBtnRotate" />
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ['floorNum', 'floorId'],
-  data () {
+  props: ["floorNum", "floorId"],
+  data() {
     return {
-      noChooseBtn: require('@/assets/img/noChoose.png'),
-      chooseBtnRotate: require('@/assets/img/chooseRotate.png'),
-      leftarrow: require('@/assets/img/left_arrow.png')
-    }
+      noChooseBtn: require("@/assets/img/noChoose.png"),
+      chooseBtnRotate: require("@/assets/img/chooseRotate.png"),
+      leftarrow: require("@/assets/img/left_arrow.png")
+    };
   },
-  created () {},
-  mounted () {},
+  created() {},
+  mounted() {},
   methods: {
-    clickUnChoose () {
-      //console.log('点击的是未选中的按钮')
-      //this.$emit('changChoose', this.floorId)
+    clickUnChoose() {
+      // console.log('点击的是未选中的按钮')
+      // this.$emit('changChoose', this.floorId)
     },
-    clickHasChoose () {
-      //console.log('点击的是已经选中的按钮')
-      //this.$emit('changChoose', this.floorId)
+    clickHasChoose() {
+      // console.log('点击的是已经选中的按钮')
+      // this.$emit('changChoose', this.floorId)
     }
   }
-}
+};
 </script>
 <style lang="stylus">
 .FloorChooseBtn {

@@ -4,11 +4,16 @@
       <Head></Head>
     </header>
     <main class="main">
+      <i class="toIndex" @click="toIndex()"></i>
       <article>
         <div class="floorNumWarp">
           <div
-            :class="activeNum === index ? 'floor light' : 'floor'"
-            v-for="(item, index) in floorList"
+            :class="
+              activeNum === index
+                ? 'floor light linerColor'
+                : 'floor linerColor'
+            "
+            v-for="(item, index) in guessRoomList"
             :key="index"
             @click="changeNum(index)"
           >
@@ -17,17 +22,33 @@
         </div>
       </article>
       <section>
-        <div class="floorContainer">
+        <div
+          class="floorContainer"
+          :style="{
+            width:
+              guessRoomList[activeNum].floorList.length > 12
+                ? Math.ceil(floorWarpWidth) * 25 + 'vw'
+                : 'auto'
+          }"
+        >
           <roomBtn
             class="guessBottomBtn"
-            v-for="(item, index) in guessRoomList"
+            v-for="(item, index) in guessRoomList[activeNum].floorList"
             :key="index"
             :name="item.name"
             :id="item.id"
+            :floorNum="activeNum + 1"
           ></roomBtn>
         </div>
       </section>
-      <footer></footer>
+      <footer>
+        <div class="navNum">
+          <span class="linerColor">{{ activeNum + 1 }}F</span>
+        </div>
+        <div class="navImgWarp">
+          <img :src="guessRoomList[activeNum].url" alt="" />
+        </div>
+      </footer>
     </main>
     <footer class="footer">©&nbsp;百智诚远</footer>
     <Modal
@@ -70,35 +91,9 @@ export default {
   },
   data() {
     return {
-      guessRoomList: [],
+      guessRoomList: this.$store.state.guessRoomList,
       // 楼层No
-      floorList: [
-        {
-          id: 1,
-          floorNum: 1,
-          floorName: "一层"
-        },
-        {
-          id: 2,
-          floorNum: 2,
-          floorName: "二层"
-        },
-        {
-          id: 3,
-          floorNum: 3,
-          floorName: "三层"
-        },
-        {
-          id: 4,
-          floorNum: 4,
-          floorName: "四层"
-        },
-        {
-          id: 5,
-          floorNum: 5,
-          floorName: "五层"
-        }
-      ],
+      floorList: [],
       // 超时弹框model
       modal1: false,
       // 超时提醒定时器
@@ -106,12 +101,14 @@ export default {
       // 超时提醒倒计时
       countDownTime: 10,
       // tabs标签页
-      activeNum: 1
+      activeNum: 0,
+      floorWarpWidth: 5
     };
   },
-  created() {},
+  created() {
+    // this.getFloorInformation();
+  },
   mounted() {
-    this.getFloorInformation();
     // 超时弹框
     this.modalShow();
   },
@@ -119,20 +116,24 @@ export default {
     // 切换楼层
     changeNum(index) {
       this.activeNum = index;
-      console.log(this.activeNum);
+      // console.log(this.activeNum);
+      // this.floorWarpWidth =
+      // this.guessRoomList[this.activeNum].floorList.length / 3;
+      // console.log(this.floorWarpWidth);
+      // this.getFloorInformation();
     },
     // 获取楼层信息
     getFloorInformation() {
-      let random = Math.ceil(Math.random() * 4);
-      // console.log(random);
-      this.guessRoomList = [];
-      this.$store.state.guessRoomList.forEach(items => {
-        if (items.floorNum === random) {
-          this.guessRoomList = items.floorList;
-        }
-      });
-      this.guessRoomList = this.guessRoomList.slice(0, 8);
-      console.log(this.guessRoomList);
+      // let random = Math.ceil(Math.random() * 4);
+      // console.log(floorContainerWidth.style);
+      // this.guessRoomList = [];
+      // this.$store.state.guessRoomList.forEach(items => {
+      //   this.floorList.push(items);
+      //   // console.log(this.floorList);
+      //   if (items.floorNum === this.activeNum + 1) {
+      //     this.guessRoomList = items.floorList;
+      //   }
+      // });
     },
 
     // 点击楼层图片跳转至对应的楼层详情页面
@@ -199,39 +200,99 @@ export default {
     text-align: center;
   }
   .main {
+    position: relative;
     height: 78vh;
-    overflow-x: scroll;
+    .toIndex {
+      position: absolute;
+      right: 0;
+      top: 2.5vw;
+      width: 6vw;
+      height: 6vw;
+      background: url("../assets/images/toIndex.png") no-repeat;
+      background-size: 6vw 6vw;
+    }
     article {
       overflow-x: scroll;
       .floorNumWarp {
         display: flex;
         width: fit-content;
-        border-bottom: 1px solid #ffffff;
+        border-bottom: 1px solid rgba(61, 161, 211, 5);
         background-color: rgba(30, 98, 152, 0.3);
+
         .floor {
-          min-width: 23vw;
+          min-width: 22vw;
           text-align: center;
           height: 11vw;
           font-family: "SourceHanSansCN-Regular";
           font-size: 3vw;
           line-height: 11vw;
           letter-spacing: 0vw;
-          border-bottom: 1px solid rgba(61, 161, 211, 1);
-          color: rgba(255, 255, 255, 1);
+          background: linear-gradient(
+            to bottom,
+            rgb(255, 255, 255),
+            rgb(62, 158, 229)
+          );
+          background-clip: text;
+          color: transparent;
         }
         .light {
-          border-bottom: 4px solid rgba(21, 180, 239, 1);
-          color: rgba(21, 180, 239, 1);
+          border-bottom: 3px solid rgba(21, 180, 239, 1);
+          // color: #2ce6ef;
+          background: linear-gradient(
+            to bottom,
+            rgb(72, 162, 248),
+            rgb(44, 230, 239)
+          );
+          background-clip: text;
+          color: transparent;
         }
       }
     }
     section {
+      overflow-x: scroll;
+      background: url("../assets/images/12箭头.png") no-repeat right center;
+      background-size: 7vw 6vw;
+      background-color: rgba(30, 98, 152, 0.3);
       .floorContainer {
         display: flex;
+        width: fit-content;
+        max-height: 39vw;
         justify-content: flex-start;
         align-items: center;
         flex-wrap: wrap;
+        padding: 6vw 2vw;
         .guessBottomBtn {
+          margin: 1.5vw;
+        }
+      }
+    }
+    footer {
+      .navNum {
+        height: 13vw;
+        background: url("../assets/images/12分割线.png") no-repeat center 9vw;
+        background-size: 82vw 2vw;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        span {
+          font-family: "SFProText-Bold";
+          font-size: 4vw;
+          line-height: 7vw;
+          letter-spacing: 0vw;
+          background: linear-gradient(
+            to bottom,
+            rgb(159, 207, 242),
+            rgb(62, 158, 229)
+          );
+          background-clip: text;
+          color: transparent;
+        }
+      }
+      .navImgWarp {
+        margin-top: 2vw;
+        text-align: center;
+        img {
+          width: 90vw;
         }
       }
     }

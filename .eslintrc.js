@@ -5,8 +5,8 @@ module.exports = {
   },
   extends: ["plugin:vue/essential", "@vue/standard"],
   rules: {
-    test: /\.less$/,
-    loader: "style-loader!css-loader!less-loader",
+    test: /\.(eot|svg|ttf|woff|woff2)$/,
+    loader: "url-loader",
     "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     // 分号

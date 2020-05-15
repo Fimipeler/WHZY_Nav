@@ -12,15 +12,17 @@ export default {
   // }
 };
 </script>
-<style lang="stylus">
-html, body {
+<style lang="less">
+html,
+body {
   height: 100%;
   margin: 0;
   overflow-x: auto;
+  font-family: "SourceHanSansSC-Regular" !important;
 }
 
 #app {
-  font-family: 'pingfang SC', 'helvetica neue', arial, 'hiragino sans gb', 'microsoft yahei ui', 'microsoft yahei', simsun, sans-serif;
+  font-family: "SourceHanSanSC-Regular" !important;
   width: 100vw;
   height: 100vh;
 }
@@ -34,7 +36,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width:100vw;
+  width: 100vw;
   .ivu-modal {
     top: 0;
   }
@@ -57,16 +59,15 @@ html, body {
 .modal-container {
   width: 72.68vw;
   height: 24.1666vh;
-  background: url('./assets/img/弹窗.png') no-repeat;
-  background-size:100%
-
+  background: url("./assets/img/弹窗.png") no-repeat;
+  background-size: 100% 100%;
   .overtime-header {
     height: 6.302vh;
     display: flex;
     justify-content: center;
 
     img {
-      width:19.26vw;
+      width: 19.26vw;
       display: block;
       margin-top: 1.5625vh;
     }
@@ -80,13 +81,13 @@ html, body {
       text-align: center;
       color: #fff;
       font-size: 2.7777vw;
-      font-family: '黑体';
+      // font-family: 'SourceHanSansCN-Regular';
       line-height: 4.629vw;
 
       span {
         font-size: 4.4444vw;
         color: #01fffc;
-        margin-right: .926vw;
+        margin-right: 0.926vw;
       }
     }
   }
@@ -102,12 +103,245 @@ html, body {
     .modalbtn {
       width: 25vw;
       height: 4.1667vh;
-      background: url('./assets/img/弹窗按钮.png') no-repeat;
-      background-size:100%;
+      background: url("./assets/img/弹窗按钮.png") no-repeat;
+      background-size: 100%;
       font-size: 2.962vw;
-      color: #FFFFFF;
+      color: #ffffff;
       text-align: center;
       line-height: 7.407vw;
+    }
+  }
+}
+.login-container {
+  width: 81vw;
+  height: 65vw;
+  background: url("./assets/images/10弹窗框.png") no-repeat;
+  background-size: 100% 100%;
+  .date-right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 12vw;
+    margin: 5vw auto 0;
+    .user_warp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 12vw;
+      height: 12vw;
+      background-image: url("./assets/images/12头像框.png");
+      background-size: 100% 100%;
+      text-align: center;
+      vertical-align: middle;
+      img {
+        width: 85%;
+        height: 85%;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+    }
+    p {
+      // font-family: "SourceHanSansCN-Regular";
+      font-size: 4vw;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 6vw;
+      letter-spacing: 0vw;
+      color: rgba(255, 245, 81, 1);
+    }
+  }
+  .overtime-tip {
+    p {
+      text-align: center;
+      // font-family: "SourceHanSansCN-Regular";
+      font-size: 2.5vw;
+      font-weight: normal;
+      line-height: 6vw;
+      letter-spacing: 0vw;
+      color: rgba(255, 255, 255, 1);
+
+      span {
+        font-size: 4.4444vw;
+        color: #01fffc;
+        margin-right: 0.926vw;
+      }
+    }
+  }
+  .login-content {
+    height: 16vw;
+    width: 76vw;
+    padding: 0 3vw;
+    margin: 3vw auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(104, 160, 242, 0.2);
+    .left {
+      .title {
+        padding-left: 8vw;
+        height: 7.5vw;
+        background: url("./assets/images/civil.png") no-repeat left center;
+        background-size: 8vw 4vw;
+        font-size: 2.5vw;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 7.5vw;
+        letter-spacing: 0vw;
+        color: rgba(1, 255, 252, 1);
+      }
+      .time {
+        font-size: 2.5vw;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 6vw;
+        letter-spacing: 0vw;
+        color: rgba(255, 255, 255, 1);
+        i {
+          margin: 0 1vw;
+        }
+      }
+    }
+    .right {
+      font-size: 3vw;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 4vw;
+      letter-spacing: 0vw;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+  .sure-cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .left {
+      background: url("./assets/images/10左按钮.png") no-repeat center;
+      margin-right: -3vw;
+    }
+    .right {
+      background: url("./assets/images/10右按钮.png") no-repeat center;
+    }
+    .modalbtn {
+      width: 38vw;
+      height: 8vw;
+      font-size: 3vw;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 8vw;
+      letter-spacing: 0vw;
+      text-align: center;
+      color: #ffffff;
+      background-size: 100% 100%;
+    }
+  }
+}
+.track-container {
+  width: 81vw;
+  height: 135vw;
+  background: url("./assets/images/14背景框.png") no-repeat;
+  background-size: 100% 100%;
+  .date-right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 12vw;
+    margin: 5vw auto 0;
+    .user_warp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      width: 12vw;
+      height: 12vw;
+      background-image: url("./assets/images/12头像框.png");
+      background-size: 100% 100%;
+      text-align: center;
+      vertical-align: middle;
+      img {
+        width: 85%;
+        height: 85%;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+    }
+    p {
+      font-family: "SourceHanSansCN-Regular";
+      font-size: 4vw;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: 6vw;
+      letter-spacing: 0vw;
+      color: rgba(255, 245, 81, 1);
+    }
+  }
+  .overtime-tip {
+    p {
+      text-align: center;
+      // font-family: "SourceHanSansCN-Regular";
+      font-size: 2.5vw;
+      font-weight: normal;
+      line-height: 6vw;
+      letter-spacing: 0vw;
+      color: rgba(255, 255, 255, 1);
+
+      span {
+        font-size: 4.4444vw;
+        color: #01fffc;
+        margin-right: 0.926vw;
+      }
+    }
+  }
+  .track-content {
+    .record {
+      display: flex;
+      width: 80vw;
+      height: 100vw;
+      background-color: rgba(40, 183, 243, 0.12);
+      overflow: scroll;
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        height: fit-content;
+        justify-content: flex-start;
+        align-content: flex-start;
+        margin: 4vw 0 0 4vw;
+        padding: 1vw 0;
+        justify-content: flex-start;
+        background: url("./assets/images/14路径.png") left;
+        background-repeat: repeat-y;
+        background-size: 15.5vw auto;
+        background-position-y: -7vw;
+        overflow: hidden;
+        .input {
+          height: 6vw;
+          width: 56vw;
+          margin-bottom: 5.63vw;
+          background-color: transparent;
+          text-align: center;
+          margin-left: 11vw;
+          background-image: url("./assets/images/30文字框右.png");
+          background-size: 100% 100%;
+          // font-family: "SourceHanSansCN-Regular";
+          font-size: 2vw;
+          font-weight: normal;
+          font-stretch: normal;
+          line-height: 6vw;
+          letter-spacing: 0vw;
+          color: rgba(255, 255, 255, 1);
+          i {
+            margin: 0 1vw;
+          }
+        }
+        .input:nth-child(2n) {
+          margin-left: 15vw;
+        }
+        .input:last-child {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

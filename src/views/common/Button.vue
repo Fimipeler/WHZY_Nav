@@ -6,38 +6,39 @@
 
 <script>
 export default {
-  props: ['name',"id"],
-  data () {
-    return {}
+  props: ["name", "id", "floorNum"],
+  data() {
+    return {};
   },
   methods: {
-    goDetailPage () {
-      this.$router.push(
-        {
-          name: 'detail',
-          params: {
-            name: this.name,
-            id:this.id
-          }
+    goDetailPage() {
+      this.$router.push({
+        name: "detail",
+        params: {
+          name: this.name,
+          id: this.id,
+          floorNum: this.floorNum
         }
-      )
-      // console.log(this.name,this.id)
+      });
     }
   }
-}
+};
 </script>
 
-<style lang="stylus">
+<style lang="less">
 .room-list-btn {
-  width: 20.74vw;
-  background: url('../../assets/img/room-btn.gif') no-repeat;
-  background-size: 100% 100%;
-  font-size: 2.7778vw;
+  width: 21vw;
+  height: 6vw;
+  font-size: 2.5vw;
+  padding: 0 2vw;
   text-align: center;
-  color:rgba(255,255,255,1);
-  line-height: 10.926vw;
+  line-height: 6vw;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(100, 188, 250, 0.3);
+  border: 1px solid rgba(41, 134, 246, 0.8);
+  overflow: hidden;
   white-space: nowrap;
-  margin: 0 2.315vw 2.604vh .83334vw;
-
+  text-overflow: ellipsis;
 }
 </style>

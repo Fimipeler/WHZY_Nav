@@ -7,6 +7,8 @@ import "./stylus/main.styl";
 import ViewUI from "view-design";
 import "view-design/dist/styles/iview.css";
 import less from "less";
+// 引入字体
+import "./assets/font/index.css";
 
 import axios from "axios";
 // 引用loading组件
@@ -23,7 +25,7 @@ import "vue-video-player/src/custom-theme.css";
 import "video.js/dist/video-js.css";
 
 import ElementUI from "element-ui";
-import 'element-ui/lib/theme-chalk/index.css';
+import "element-ui/lib/theme-chalk/index.css";
 
 Vue.config.productionTip = false;
 Vue.use(touch);
@@ -36,12 +38,16 @@ Vue.use(VideoPlayer);
 Vue.use(VueAwesomeSwiper /* { default options with global component } */);
 /* 配置请求http */
 axios.defaults.baseURL = "http://47.104.238.83";
+axios.defaults.timeout = 5000;
+// axios.defaults.headers.post["Content-Type"] = "application/json";
+// axios.defaults.crossDomain = true;
+// axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 
 const vue = new Vue({
   router,
   store,
-  render: (h) => h(App),
+  render: h => h(App)
 }).$mount("#app");
 
 // window.addEventListener('load', () => {
