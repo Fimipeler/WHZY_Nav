@@ -7,7 +7,7 @@
     </header>
     <main class="main">
       <div class="content">
-        <canvas id="canv" style="position: absolute; z-index:-1;"></canvas>
+        <canvas id="canv" style="position: absolute; z-index: -1;"></canvas>
         <div class="baseBox">
           <div class="video-box">
             <video id="video" autoplay></video>
@@ -64,7 +64,7 @@ export default {
       logo: require("@/assets/images/logo.png"),
       GetBase: "",
       showModal: false,
-      user: this.$store.state.user
+      user: this.$store.state.user,
     };
   },
   mounted() {
@@ -92,20 +92,20 @@ export default {
         {
           video: {
             width: 720,
-            height: 720
+            height: 720,
           },
-          audio: false
+          audio: false,
         },
-        function(localMediaStream) {
+        function (localMediaStream) {
           var video = document.getElementById("video");
           video.srcObject = localMediaStream;
-          video.onloadedmetadata = function(e) {
+          video.onloadedmetadata = function (e) {
             // console.log("Label: " + localMediaStream.id);
             // console.log("AudioTracks", localMediaStream.getAudioTracks());
             // console.log("VideoTracks ", localMediaStream.getVideoTracks());
           };
         },
-        function(e) {
+        function (e) {
           console.log("Reeeejected!", e);
         }
       );
@@ -140,16 +140,16 @@ export default {
           statue = true;
           await _this.$axios
             .post("http://" + ip + "/api/Face/Testing/Base64", {
-              Base64: imgBase64
+              Base64: imgBase64,
             })
-            .then(res => {
+            .then((res) => {
               if (res.data.status === true) {
                 console.log(res.data.msg);
                 _this.$axios
                   .post("http://" + ip + "/api/Face/Comparison/Base64", {
-                    Base64: imgBase64
+                    Base64: imgBase64,
                   })
-                  .then(res => {
+                  .then((res) => {
                     if (res.data.status === true) {
                       // console.log(res);
                       _this.showModal = true;
@@ -161,7 +161,7 @@ export default {
                       console.log(res.data.msg);
                     }
                   })
-                  .catch(error => {
+                  .catch((error) => {
                     console.log("匹配请求失败", error);
                     return false;
                   });
@@ -169,18 +169,29 @@ export default {
                 console.log(res.data.msg);
               }
             })
-            .catch(error => {
+            .catch((error) => {
               console.log("识别请求失败", error);
               return false;
             });
           statue = false;
         }
       }
-    }
+    },
+  },
+  watch: {
+    showModal(val) {
+      // 监听 弹框超过10秒关闭弹框并开启人脸识别
+      if (val === true) {
+        setTimeout(() => {
+          this.showModal = false;
+          this.Upimg();
+        }, 10000);
+      }
+    },
   },
   destroyed() {
     clearInterval(this.GetBase);
-  }
+  },
 };
 </script>
 <style lang="less">
