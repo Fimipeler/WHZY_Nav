@@ -64,13 +64,14 @@ export default {
       logo: require("@/assets/images/logo.png"),
       GetBase: "",
       showModal: false,
-      user: this.$store.state.user,
+      user: this.$store.state.user
     };
   },
   mounted() {
     // 开启摄像头
     this.openNavgate();
     this.Upimg();
+    // this.login();
   },
   methods: {
     // 跳转主页
@@ -92,20 +93,20 @@ export default {
         {
           video: {
             width: 720,
-            height: 720,
+            height: 720
           },
-          audio: false,
+          audio: false
         },
-        function (localMediaStream) {
+        function(localMediaStream) {
           var video = document.getElementById("video");
           video.srcObject = localMediaStream;
-          video.onloadedmetadata = function (e) {
+          video.onloadedmetadata = function(e) {
             // console.log("Label: " + localMediaStream.id);
             // console.log("AudioTracks", localMediaStream.getAudioTracks());
             // console.log("VideoTracks ", localMediaStream.getVideoTracks());
           };
         },
-        function (e) {
+        function(e) {
           console.log("Reeeejected!", e);
         }
       );
@@ -140,28 +141,30 @@ export default {
           statue = true;
           await _this.$axios
             .post("http://" + ip + "/api/Face/Testing/Base64", {
-              Base64: imgBase64,
+              Base64: imgBase64
             })
-            .then((res) => {
+            .then(res => {
               if (res.data.status === true) {
                 console.log(res.data.msg);
                 _this.$axios
                   .post("http://" + ip + "/api/Face/Comparison/Base64", {
-                    Base64: imgBase64,
+                    Base64: imgBase64
                   })
-                  .then((res) => {
+                  .then(res => {
                     if (res.data.status === true) {
                       // console.log(res);
                       _this.showModal = true;
                       _this.$store.state.user.img = imgBase64;
                       _this.$store.state.user.name = res.data.result.UserName;
-                      clearInterval(_this.GetBase);
+                      // clearInterval(_this.GetBase);
                       console.log("登录成功!");
+                      // 登录
+                      _this.login();
                     } else {
                       console.log(res.data.msg);
                     }
                   })
-                  .catch((error) => {
+                  .catch(error => {
                     console.log("匹配请求失败", error);
                     return false;
                   });
@@ -169,29 +172,53 @@ export default {
                 console.log(res.data.msg);
               }
             })
-            .catch((error) => {
+            .catch(error => {
               console.log("识别请求失败", error);
+              // _this.showModal = true;
               return false;
             });
           statue = false;
         }
       }
     },
+    // 登录
+    login() {
+      let _this = this;
+      _this.$axios
+        .post("/client/login", {
+          fydm: "1234",
+          loginStatus: "0",
+          tackName: "导航与导诉",
+          tackNum: "01",
+          userIdCard: "421302199910015578"
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.code === 200) {
+            console.log(res.data.data.token);
+            window.localStorage.setItem("token", res.data.data.token);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          return false;
+        });
+    }
   },
   watch: {
     showModal(val) {
-      // 监听 弹框超过10秒关闭弹框并开启人脸识别
+      // 监听 增加登录成功超过10秒无操作关闭弹框并开启人脸识别
       if (val === true) {
         setTimeout(() => {
           this.showModal = false;
-          this.Upimg();
         }, 10000);
       }
-    },
+    }
   },
   destroyed() {
     clearInterval(this.GetBase);
-  },
+    // window.localStorage.removeItem("token");
+  }
 };
 </script>
 <style lang="less">

@@ -298,10 +298,11 @@ body {
     .record {
       display: flex;
       width: 80vw;
-      height: 100vw;
+      height: 106vw;
       background-color: rgba(40, 183, 243, 0.12);
       overflow: scroll;
       .container {
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         height: fit-content;
@@ -310,11 +311,30 @@ body {
         margin: 4vw 0 0 4vw;
         padding: 1vw 0;
         justify-content: flex-start;
-        background: url("./assets/images/14路径.png") left;
+        background: url("./assets/images/路径15.png") left;
         background-repeat: repeat-y;
-        background-size: 15.5vw auto;
-        background-position-y: -7vw;
+        background-size: 15.65vw auto;
+        background-position-y: -6.5vw;
         overflow: hidden;
+        .shade {
+          // left: 1vw;
+          width: 5vw;
+          background-color: rgba(8, 46, 84, 1);
+        }
+        .topShade {
+          position: absolute;
+          top: 0;
+          width: 2vw;
+          left: 2.35vw;
+          height: 2.4vw;
+        }
+        .bottomShade {
+          position: absolute;
+          bottom: 0;
+          left: 4vw;
+          width: 3.14vw;
+          height: 3.5vw;
+        }
         .input {
           height: 6vw;
           width: 56vw;
@@ -324,9 +344,9 @@ body {
           margin-left: 11vw;
           background-image: url("./assets/images/30文字框右.png");
           background-size: 100% 100%;
-          // font-family: "SourceHanSansCN-Regular";
+          font-family: "SourceHanSansCN-Regular";
           font-size: 2vw;
-          font-weight: normal;
+          font-weight: 300;
           font-stretch: normal;
           line-height: 6vw;
           letter-spacing: 0vw;

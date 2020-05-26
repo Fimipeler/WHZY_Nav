@@ -2,7 +2,7 @@
   <div class="component-head">
     <header>
       <a class="logo-left">
-        <img :src="logo" alt="黄陂区人民法院" />
+        <img :src="logo" alt="" />
       </a>
       <article class="date-right" @click="modalTrack = !modalTrack">
         <div class="user_warp">
@@ -32,6 +32,8 @@
         <div class="track-content">
           <div class="right record">
             <div class="container">
+              <div class="topShade shade"></div>
+              <div class="bottomShade shade"></div>
               <div class="input" v-for="(item, index) in 30" :key="index">
                 <span>2020-01-06 15:30</span>
                 <i></i>
